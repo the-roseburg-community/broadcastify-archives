@@ -1,0 +1,6 @@
+flask
+requests
+uwsgi
+Flask-Caching
+redis
+pytz

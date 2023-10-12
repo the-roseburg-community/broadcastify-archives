@@ -1,0 +1,82 @@
+/* Background and text color for the body */
+body {
+    background: #f0f0f0;
+    color: #333;
+    font-family: "Arial", sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    font-size: 20px;
+    color: #007bff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px;
+    display: inline-block;
+    border-left: 2px solid #007bff; /* Different color for the left border */
+    border-right: 2px solid #007bff; /* Different color for the right border */
+}
+
+li:hover {
+    background: #007bff;
+    color: #fff;
+}
+
+a {
+    font-size: 20px;
+    color: #007bff; /* Blue link color */
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid #007bff; /* Blue border around links */
+    border-radius: 5px; /* Rounded corners */
+    margin: 10px;
+    display: inline-block; /* Make links appear as blocks */
+}
+
+a:hover {
+    background: #007bff; /* Blue background on hover */
+    color: #fff; /* White text on hover */
+}
+/* Header styling with background color and text color */
+.header {
+    background-color: #0077b6;
+    color: #fff;
+}
+
+/* Container for centering content and setting margin and padding */
+.container {
+    text-align: center;
+    margin: 20px;
+    padding: 10px;
+}
+
+/* Button styling with background color, text color, padding, and border */
+.button {
+    background-color: #0077b6;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+}
+
+/* Card-like element with border, shadow, and border radius */
+.card {
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+/* Apply a hover effect on buttons */
+.button {
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #005581;
+}

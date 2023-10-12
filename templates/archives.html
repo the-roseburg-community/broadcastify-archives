@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Archives for {{ date }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="header"><h1>Archives for {{ date }}</h1></div>
+  <ul>
+    {% for archive in archives %}
+      <li>
+        <a href="{{ archive.url }}">{{ archive.archive }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

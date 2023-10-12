@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  archives:
+    build: .
+    restart: on-failure
+    environment:
+      - BROADCASTIFY_USERNAME=XXXXXX
+      - BROADCASTIFY_PASSWORD=XXXXXX
+      - FEED_ID=12345
+      - REDIS_PASSWORD=passwordsuchstrong
+    networks:
+      - archive-net
+    depends_on: 
+      - redis
+    ports:
+      - 80:5000
+  redis:
+    image: bitnami/redis
+    restart: on-failure
+    networks:
+      - archive-net
+    environment:
+      - REDIS_PASSWORD=passwordsuchstrong
+
+networks:
+  archive-net:
