@@ -13,7 +13,7 @@ services:
     depends_on: 
       - redis
     ports:
-      - 80:5000
+      - 5000:5000
   redis:
     image: bitnami/redis
     restart: on-failure
