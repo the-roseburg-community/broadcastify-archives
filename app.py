@@ -22,7 +22,11 @@ cache = Cache(config = {
     "CACHE_DEFAULT_TIMEOUT": 180,
     "CACHE_REDIS_HOST": 'redis',
     "CACHE_REDIS_PORT": 6379,
-    "CACHE_REDIS_PASSWORD": REDIS_PASSWORD
+    "CACHE_REDIS_PASSWORD": REDIS_PASSWORD,
+    "CACHE_REDIS_OPTIONS": {
+        "socket_timeout": 5,
+        "socket_connect_timeout": 5,
+    }
 })
 
 app = Flask(__name__, template_folder='./templates')
@@ -66,12 +70,12 @@ def calendar_picker(year, month, day, start_year, start_month):
 
 @app.route('/archives/<date>')
 def archives(date):
-  # Construct the API URL for the specified date
-  api_url = f"{BASE_API_URL}{date}"
+  # Fetch data using the get_data_for_date function
+  data = get_data_for_date(date)
 
-  # Fetch data from the API
-  response = requests.get(api_url)
-  data = response.json()
+  if data is None:
+    # Handle the case when data is not available or an error occurs
+    return render_template('error.html')
 
   # Extract the archives from the API response
   archives = data.get("archives", [])
@@ -79,7 +83,15 @@ def archives(date):
   # Render the template and pass the archives and date to it
   return render_template('archives.html', archives=archives, date=date)
 
-cache.init_app(app)  # Initialize the cache with your Flask app  # Move this line here
+@cache.memoize(timeout=3600)
+def get_data_for_date(date_str):
+  api_url = f"{BASE_API_URL}{date_str}"
+  response = requests.get(api_url)
+  if response.status_code == 200:
+    return response.json()
+  return None
+
+cache.init_app(app)  # Initialize the cache with your Flask app
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', debug=True)
