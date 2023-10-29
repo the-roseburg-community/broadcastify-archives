@@ -78,7 +78,7 @@ def index():
 
 @app.route('/calendar/<int:year>/<int:month>/<int:day>/<int:start_year>/<int:start_month>')
 @login_required
-@cache.cached(timeout=3600)
+@cache.cached(timeout=1800)
 def calendar_picker(year, month, day, start_year, start_month):
   # Calculate the first and last days for the calendar
   today = datetime.now().date()
@@ -107,6 +107,7 @@ def calendar_picker(year, month, day, start_year, start_month):
 
 @app.route('/archives/<date>')
 @login_required
+@cache.cached(timeout=1800)
 def archives(date):
   # Fetch data using the get_data_for_date function
   data = get_data_for_date(date)
@@ -138,7 +139,6 @@ def login():
   else:
     return render_template('login.html')
 
-@cache.memoize(timeout=3600)
 def get_data_for_date(date_str):
   api_url = f"{BASE_API_URL}{date_str}"
   response = requests.get(api_url)
