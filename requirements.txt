@@ -7,3 +7,5 @@ redis
 pytz
 Flask-Login
 Werkzeug==0.16.1
+celery
+celery[redis]

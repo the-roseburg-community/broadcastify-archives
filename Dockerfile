@@ -35,6 +35,10 @@ RUN useradd appuser
 RUN chown -R appuser /opt/app
 COPY supervisord.conf /etc/
 RUN chmod 0644 /etc/supervisord.conf
+COPY celery.conf /opt/app/venv/bin/celery
+RUN chmod +x /opt/app/venv/bin/celery && \
+    chown appuser /opt/app/venv/bin/celery && \
+    chmod 744 /opt/app/*.py
 
 USER appuser
 ENV PATH="/opt/app/venv/bin:$PATH"
