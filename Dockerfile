@@ -17,6 +17,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 COPY ./requirements.txt ./
 RUN pip install --upgrade pip && \
+    pip install --upgrade markupsafe && \
     pip3 install -r requirements.txt
 
 # ---------------------------------------
